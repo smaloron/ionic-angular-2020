@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Home sweet home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h1>Bonjour {{ name }} vous aurez {{ age + 1 }} ans</h1>
+  <p>Vous aimez les {{ fruits[0] }}</p>
+
+  <ion-list>
+    <!-- boucle pour tous les éléments du tableau fruit -->
+    <ion-item *ngFor="let item of fruits">
+      {{ item }}
+    </ion-item>
+  </ion-list>
+
+</ion-content>
