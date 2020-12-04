@@ -58,7 +58,7 @@ export class HomePage {
     this.fruits.push(this.inputFruit);
     this.name = this.inputFruit;
   }
-
+  // Filtre des fruits
   filterFruits() {
     // Si le champ de recherche est plein on filtre
     // sinon on retourne toute la liste
