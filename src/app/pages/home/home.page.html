@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-title [color]="getListColor()">
       Home sweet home
     </ion-title>
   </ion-toolbar>
@@ -10,11 +10,25 @@
   <h1>Bonjour {{ name }} vous aurez {{ age + 1 }} ans</h1>
   <p>Vous aimez les {{ fruits[0] }}</p>
 
+
+
   <ion-list>
     <!-- boucle pour tous les éléments du tableau fruit -->
-    <ion-item *ngFor="let item of fruits">
+    <ion-item *ngFor="let item of fruits" [color]="getListColor()">
       {{ item }}
     </ion-item>
   </ion-list>
+
+  <!-- Le div est affiché quand la variable user est nulle-->
+  <div *ngIf="isUserHidden()">
+    <h1>Login</h1>
+    <ion-button expand="block" (click)="login()"> login </ion-button>
+  </div>
+
+  <!-- Le div est masqué (hidden) quand la variable user est nulle -->
+  <div [hidden]="isUserHidden()">
+    <h3>Vous êtes identifié en tant que {{ user?.name }}</h3>
+    <ion-button expand="block" (click)="logout()"> logout </ion-button>
+  </div>
 
 </ion-content>
