@@ -10,11 +10,23 @@
   <h1>Bonjour {{ name }} vous aurez {{ age + 1 }} ans</h1>
   <p>Vous aimez les {{ fruits[0] }}</p>
 
+  <!-- Formulaire pour la saisie d'un fruit -->
+  <ion-item>
+    <ion-label position="stacked">Votre fruit</ion-label>
+    <!-- ngModel permet de lier la saisie à une variable -->
+    <ion-input type="text" [(ngModel)]="inputFruit"></ion-input>
+  </ion-item>
+  <!-- bouton qui appelle la fonction d'ajout de fruit -->
+  <ion-button expand="block" (click)="addFruit()">Ajouter</ion-button>
 
+  <!-- Recherche d'un fruit -->
+  <ion-item>
+    <ion-input [(ngModel)]="searchFruit" placeholder="recherche"></ion-input>
+  </ion-item>
 
   <ion-list>
     <!-- boucle pour tous les éléments du tableau fruit -->
-    <ion-item *ngFor="let item of fruits" [color]="getListColor()">
+    <ion-item *ngFor="let item of filterFruits()" [color]="getListColor()">
       {{ item }}
     </ion-item>
   </ion-list>

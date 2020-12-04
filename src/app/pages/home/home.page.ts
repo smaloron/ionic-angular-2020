@@ -13,15 +13,20 @@ export class HomePage {
 
   public age = 50;
 
-  //Déclaration d'un tableau ordinal
+  // Déclaration d'un tableau ordinal
   public fruits = ['Groseilles', 'Fraises', 'Framboises', 'Bananes'];
 
-  //Déclaration d'un objet
+  // Déclaration d'un objet
   public user = {
     name: 'Joe User',
     password: '123',
     role: 'admin'
   };
+
+  // variable pour la saisie d'un nouveau fruit
+  public inputFruit: string;
+
+  public searchFruit: string;
 
   constructor() { }
 
@@ -47,6 +52,23 @@ export class HomePage {
       role: 'admin',
       password: '123'
     };
+  }
+
+  addFruit() {
+    this.fruits.push(this.inputFruit);
+    this.name = this.inputFruit;
+  }
+
+  filterFruits() {
+    // Si le champ de recherche est plein on filtre
+    // sinon on retourne toute la liste
+    if (this.searchFruit) {
+      // Retourne tous les éléments du tableau qui commencent par
+      // la valeur recherchée
+      return this.fruits.filter((item) => item.startsWith(this.searchFruit));
+    } else {
+      return this.fruits;
+    }
   }
 
 }
