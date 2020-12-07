@@ -36,16 +36,27 @@ export class HomePage {
 
   public searchFruit: string;
 
-  constructor() { }
+  constructor() { 
+    this.getData();
+  }
 
   /**
    * Sauvegarde des données avec le moteur Storage
    */
-  private persist() {
-    Storage.set({
+  private async persist() {
+    await Storage.set({
       key: STORAGE_KEY,
       value: JSON.stringify(this.fruits)
     });
+  }
+
+  /**
+   * Récupération des données sauvegardées
+   */
+  private async getData() {
+    const data = await Storage.get({ key: STORAGE_KEY });
+    console.log(data);
+    this.fruits = JSON.parse(data.value);
   }
 
   public isUserHidden() {
