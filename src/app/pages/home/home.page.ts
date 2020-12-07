@@ -59,6 +59,11 @@ export class HomePage {
     this.fruits = JSON.parse(data.value);
   }
 
+  deleteFruit(pos) {
+    this.fruits.splice(pos, 1);
+    this.persist();
+  }
+
   public isUserHidden() {
     // Retourne vrai quand l'utilisateur n'existe pas
     return !this.user;

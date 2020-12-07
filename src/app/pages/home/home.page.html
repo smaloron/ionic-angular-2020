@@ -26,8 +26,10 @@
 
   <ion-list>
     <!-- boucle pour tous les éléments du tableau fruit -->
-    <ion-item *ngFor="let item of filterFruits()" [color]="getListColor()">
+    <ion-item *ngFor="let item of filterFruits(); let pos=index" [color]="getListColor()">
       {{ item }}
+
+      <ion-icon slot="end" name="trash" (click)="deleteFruit(pos)"></ion-icon>
     </ion-item>
   </ion-list>
 
