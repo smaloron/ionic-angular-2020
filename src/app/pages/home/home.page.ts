@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
 
+// Importation des plugins Capacitor
+import { Plugins } from '@capacitor/core';
+
+// On veut utiliser Storage qui se trouve dans plugins
+const { Storage } = Plugins;
+
+const STORAGE_KEY = 'fruits';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -30,6 +38,16 @@ export class HomePage {
 
   constructor() { }
 
+  /**
+   * Sauvegarde des données avec le moteur Storage
+   */
+  private persist() {
+    Storage.set({
+      key: STORAGE_KEY,
+      value: JSON.stringify(this.fruits)
+    });
+  }
+
   public isUserHidden() {
     // Retourne vrai quand l'utilisateur n'existe pas
     return !this.user;
@@ -55,8 +73,11 @@ export class HomePage {
   }
 
   addFruit() {
+    // Ajout au tableau
     this.fruits.push(this.inputFruit);
     this.name = this.inputFruit;
+    // Persistence des données
+    this.persist();
   }
   // Filtre des fruits
   filterFruits() {
