@@ -7,6 +7,14 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
+  <ion-button (click)="takePicture()" expand="block">
+    Prendre une photo
+  </ion-button>
+
+  <ion-img [src]="getImgSource()" *ngIf="imageData"></ion-img>
+
+
   <h1>Bonjour {{ name }} vous aurez {{ age + 1 }} ans</h1>
   <p>Vous aimez les {{ fruits[0] }}</p>
 

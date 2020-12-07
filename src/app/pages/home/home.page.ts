@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 // Importation des plugins Capacitor
-import { Plugins } from '@capacitor/core';
+import { Plugins, CameraOptions, CameraResultType, CameraSource } from '@capacitor/core';
 
-// On veut utiliser Storage qui se trouve dans plugins
-const { Storage } = Plugins;
+// On veut utiliser Storage et Camera qui se trouvent dans plugins
+const { Storage, Camera } = Plugins;
 
 const STORAGE_KEY = 'fruits';
 
@@ -24,6 +24,8 @@ export class HomePage {
   // Déclaration d'un tableau ordinal
   public fruits = ['Groseilles', 'Fraises', 'Framboises', 'Bananes'];
 
+  public imageData;
+
   // Déclaration d'un objet
   public user = {
     name: 'Joe User',
@@ -38,6 +40,26 @@ export class HomePage {
 
   constructor() { 
     this.getData();
+  }
+
+  /**
+   * Prendre une photo
+   */
+  public async takePicture() {
+    const settings: CameraOptions = {
+      quality: 80,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Photos,
+      correctOrientation: true
+    };
+
+    this.imageData = await Camera.getPhoto(settings);
+
+    console.log(this.imageData);
+  }
+
+  getImgSource() {
+    return 'data:image/jpeg;base64,' + this.imageData.base64String;
   }
 
   /**
@@ -56,7 +78,7 @@ export class HomePage {
   private async getData() {
     const data = await Storage.get({ key: STORAGE_KEY });
     console.log(data);
-    this.fruits = JSON.parse(data.value);
+    this.fruits = JSON.parse(data.value) || [];
   }
 
   deleteFruit(pos) {
